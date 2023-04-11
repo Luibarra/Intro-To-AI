@@ -120,13 +120,13 @@ def fitness(genotype, allowance):
     days2 = int(genotype[6:9])
     days3 = int(genotype[11:14])
     #print(genotype) 
-    for filename in os.listdir('Stockpicking/testdata/'):
+    for filename in os.listdir('testdata/'):
         data = []
         mainFund = allowance
         savingFund = 0
         shares = 0
         #------------- file directory ----------------
-        with open('Stockpicking/testdata/'+filename) as textFile:
+        with open('testdata/'+filename) as textFile:
             for line in textFile:
                 x = [item.strip() for item in line.split(' ')]   
                 for i in x:         #change each str num to float variable
@@ -322,7 +322,7 @@ for x in initpop:
 print()
 
 e = avgEval(initpop, allowance)     #find average fitness over initpop 
-#print("e =", e,"\n")       #Debug
+print("e =", e,"\n")       #Debug
 
 #---- Individual Evaluation ----
 #General Comparison -- remove penalty from fit func, 100000 allowance -- BAC,GRMN,KR DATA
@@ -371,13 +371,13 @@ for g in initpop:
 
 
 #Debug: print out interpop
-# print("interpop len:", len(interpop), "\n")
-# for x in interpop:
-#     print("[", end = " ")
-#     for y in x:
-#        print(y, end = " ")
-#     print("]")
-# print()
+print("interpop len:", len(interpop), "\n")
+for x in interpop:
+    print("[", end = " ")
+    for y in x:
+       print(y, end = " ")
+    print("]")
+print()
 
 #---- Generations ----
 currentGen = interpop       #set current gen
