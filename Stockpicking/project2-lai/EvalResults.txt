@@ -1,0 +1,133 @@
+New Company Data Eval vs Naive Approaches
+$100,000 & no punishing
+
+Evaluating Naive vs Best Fit Genotypes...
+
+--- Naive Approaches ---
+Genotype: s010&s010&s010  Fit:  20,588,016.44
+Genotype: s030&s030&s030  Fit:  32,681,148.72
+Genotype: e010&e010&e010  Fit:  10,886,636.35
+Genotype: e030&e030&e030  Fit:  9,220,927.96
+Genotype: m010&m010&m010  Fit:  4,926,611.00
+Genotype: m030&m030&m030  Fit:  4,036,815.43
+Genotype: s010|e010|m010  Fit:  21,186,300.94
+Genotype: s030|e030|m030  Fit:  40,427,835.09
+
+--- Best Fit Genotype ---
+Genotype: s119|s010|m635  Fit:  95,151,607.80
+
+Runtime: 13431.457996368408
+
+-----------------------------------------------
+
+Best Fit Genotype Performance Over Varied Time
+
+s119|s010|m635
+AMZN-1_month.txt 	Fit: 100,626.64
+AMZN-2_months.txt 	Fit: 93,968.83
+AMZN-4_months.txt 	Fit: 90,982.16
+AMZN-8_months.txt 	Fit: 106,952.74
+AMZN-18_months.txt 	Fit: 10,139,524.86
+AMZN-36_months.txt 	Fit: 17,417,299.20
+AMZN-60_months.txt 	Fit: 20,454,655.33
+AMZN-120_months.txt 	Fit: 31,198,778.42
+
+
+-----------------------------------------------
+
+Naive Approaches over Varied Time
+
+s010&s010&s010
+AMZN-1_month.txt 	Fit: 100,626.64
+AMZN-2_months.txt 	Fit: 93,968.83
+AMZN-4_months.txt 	Fit: 90,982.16
+AMZN-8_months.txt 	Fit: 106,952.74
+AMZN-18_months.txt 	Fit: 4,948,881.71
+AMZN-36_months.txt 	Fit: 4,999,356.16
+AMZN-60_months.txt 	Fit: 4,980,035.23
+AMZN-120_months.txt 	Fit: 5,042,952.67
+
+
+
+s030&s030&s030
+AMZN-1_month.txt 	Fit: 100,000.00
+AMZN-2_months.txt 	Fit: 100,000.00
+AMZN-4_months.txt 	Fit: 93,046.21
+AMZN-8_months.txt 	Fit: 91,914.26
+AMZN-18_months.txt 	Fit: 6,737,571.36
+AMZN-36_months.txt 	Fit: 6,215,769.56
+AMZN-60_months.txt 	Fit: 8,336,395.09
+AMZN-120_months.txt 	Fit: 7,898,944.14
+
+
+
+e010&e010&e010
+AMZN-1_month.txt 	Fit: 99,666.66
+AMZN-2_months.txt 	Fit: 97,201.54
+AMZN-4_months.txt 	Fit: 91,873.44
+AMZN-8_months.txt 	Fit: 72,771.95
+AMZN-18_months.txt 	Fit: 100,569.64
+AMZN-36_months.txt 	Fit: 1,145,231.33
+AMZN-60_months.txt 	Fit: 2,123,512.76
+AMZN-120_months.txt 	Fit: 2,383,121.31
+
+
+
+e030&e030&e030
+AMZN-1_month.txt 	Fit: 100,000.00
+AMZN-2_months.txt 	Fit: 100,204.32
+AMZN-4_months.txt 	Fit: 366,817.79
+AMZN-8_months.txt 	Fit: 540,388.09
+AMZN-18_months.txt 	Fit: 1,555,083.65
+AMZN-36_months.txt 	Fit: 1,480,219.13
+AMZN-60_months.txt 	Fit: 2,114,171.25
+AMZN-120_months.txt 	Fit: 2,354,700.63
+
+
+
+m010&m010&m010
+AMZN-1_month.txt 	Fit: 99,425.14
+AMZN-2_months.txt 	Fit: 99,425.14
+AMZN-4_months.txt 	Fit: 100,290.10
+AMZN-8_months.txt 	Fit: 368,308.99
+AMZN-18_months.txt 	Fit: 662,886.92
+AMZN-36_months.txt 	Fit: 726,715.73
+AMZN-60_months.txt 	Fit: 707,146.04
+AMZN-120_months.txt 	Fit: 857,134.67
+
+
+
+
+m030&m030&m030
+AMZN-1_month.txt	Fit: 100,000.00
+AMZN-2_months.txt 	Fit: 100,000.00
+AMZN-4_months.txt	Fit: 96,313.68
+AMZN-8_months.txt 	Fit: 95,045.90
+AMZN-18_months.txt	Fit: 573,530.66
+AMZN-36_months.txt	Fit: 692,930.43
+AMZN-60_months.txt	Fit: 663,689.77
+AMZN-120_months.txt	Fit: 855,861.91
+
+
+
+s010|e010|m010
+AMZN-1_month.txt 	Fit: 99,666.66
+AMZN-2_months.txt 	Fit: 91,217.49
+AMZN-4_months.txt 	Fit: 84,749.33
+AMZN-8_months.txt 	Fit: 76,695.80
+AMZN-18_months.txt 	Fit: 1,588,699.42
+AMZN-36_months.txt 	Fit: 2,341,797.94
+AMZN-60_months.txt 	Fit: 2,343,553.03
+AMZN-120_months.txt 	Fit: 3,517,070.36
+
+
+
+s030|e030|m030
+AMZN-1_month.txt 	Fit: 100,000.00
+AMZN-2_months.txt 	Fit: 100,204.32
+AMZN-4_months.txt 	Fit: 237,576.43
+AMZN-8_months.txt 	Fit: 1,689,182.42
+AMZN-18_months.txt 	Fit: 7,959,994.94
+AMZN-36_months.txt 	Fit: 7,316,241.30
+AMZN-60_months.txt 	Fit: 8,747,157.96
+AMZN-120_months.txt 	Fit: 8,418,393.86
