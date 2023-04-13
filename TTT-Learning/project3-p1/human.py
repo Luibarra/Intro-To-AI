@@ -39,3 +39,6 @@ class Human:
       else: # status == 0
          # no winner
          p = 0
+
+   def stopPlaying():
+      return

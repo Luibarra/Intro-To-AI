@@ -53,8 +53,8 @@ def checkTie( board ):
 gameboard = "---------"
 gameover = False
 
-A = RandomPlayer('X')
-B = Agent('O')
+A = Agent('X')
+B = RandomPlayer('O')
 
 numWinA = 0
 numWinB = 0
@@ -120,7 +120,7 @@ for g in range(100):
          
       move = move + 1
 
-A.stopPlaying()
+A.stopPlaying()    #im very unsure what this would do and it does not previously exist
 B.stopPlaying()
 
 print( "A   : " + str(numWinA)  + " games" )

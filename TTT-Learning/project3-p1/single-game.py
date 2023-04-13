@@ -56,7 +56,7 @@ gameover = False
 
 
 # ---- Assign Players ----
-A = RandomPlayer('X')  # numbers
+A = Agent('X')  # numbers
 B = Human('O')         # letters
 
 # play game until done

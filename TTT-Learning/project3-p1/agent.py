@@ -1,4 +1,5 @@
 import random
+from os.path import exists
 
 class Agent:
    
@@ -6,6 +7,14 @@ class Agent:
    
    def __init__( self, xORo ):
       self.symbol = xORo
+
+      if(xORo == 'X'): 
+         if( not exists('learningdata/X-Data.txt')): 
+            open('learningdata/X-Data.txt', 'x')
+      elif(xORo == 'O'): 
+         if( not exists('learningdata/O-Data.txt')): 
+            open('learningdata/O-Data.txt', 'x')
+               
    
    def getMove( self, gameboard ):
       # play in the next open space, looking from top corner
@@ -25,3 +34,6 @@ class Agent:
       else: # status == 0
          # no winner
          p = 0
+
+   def stopPlaying():
+      return

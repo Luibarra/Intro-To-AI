@@ -17,3 +17,6 @@ class RandomPlayer:
    def endGame( self, status, gameboard ):
       # a good agent would learn here
       status = status
+
+   def stopPlaying():
+      return
