@@ -120,7 +120,7 @@ for g in range(100):
          
       move = move + 1
 
-A.stopPlaying()    #im very unsure what this would do and it does not previously exist
+A.stopPlaying()   
 B.stopPlaying()
 
 print( "A   : " + str(numWinA)  + " games" )

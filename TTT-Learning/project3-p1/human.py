@@ -40,5 +40,5 @@ class Human:
          # no winner
          p = 0
 
-   def stopPlaying():
+   def stopPlaying(self):
       return

@@ -109,3 +109,6 @@ while( not gameover ):
       printBoard(gameboard,0)
       
    move = move + 1
+
+A.stopPlaying()   
+B.stopPlaying()
