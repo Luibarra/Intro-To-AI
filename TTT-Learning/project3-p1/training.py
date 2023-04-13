@@ -53,14 +53,14 @@ def checkTie( board ):
 gameboard = "---------"
 gameover = False
 
-A = Agent('X')
-B = RandomPlayer('O')
+A = RandomPlayer('X')
+B = Agent('O')
 
 numWinA = 0
 numWinB = 0
 numTied = 0
 
-for g in range(100000):
+for g in range(1000):
    # reset global variables
    gameboard = "---------"
    gameover = False

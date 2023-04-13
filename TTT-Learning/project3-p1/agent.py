@@ -3,12 +3,12 @@ from os.path import exists
 
 class Agent:
 
-   lFactor = .5
-   ldecay = .2
+   lfactor = .5
+   ldecay = .5
 
    kb = []
    gamesteps = []
-   dChances = [0.11,0.11,0.11,0.11,0.11,0.11,0.11,0.11,0.11]
+   dChances = [.11, .11, .11, .11, .11, .11, .11, .11, .11]
 
    symbol = 'X'
    datafile = ''
@@ -95,20 +95,80 @@ class Agent:
       # learn from the result
       if status == 1: 
          # you won the game
-         p = 1
+         factor = self.lfactor
+         m = len(self.gamesteps)-1
+
+         while m >= 0: 
+            state = self.gamesteps[m]    #current step
+            if(isinstance(state, str)):   
+               chose = self.gamesteps[m+1]   #spot chosen
+               for i in self.kb:
+                  if i[0] == state:     #find the gameboard in kb 
+                     factor *= self.ldecay
+                     diff = (i[chose] - (i[chose] + (i[chose] * factor)) )*-1   #the difference taken will be spread across the other possible choices   
+                     i[chose] = i[chose] + (i[chose] * factor)         #subtract a percentage of the current value
+                     if i[chose] > 1: 
+                        i[chose] = 1
+                     
+                     
+
+                     c = 1
+                     optCount = 0
+                     while c < len(i):    #find total other options in order to split the remaining num 
+                        if i[c] != -1 and c != chose: 
+                           optCount += 1
+                        c += 1
+
+                     c = 1
+                     while c < len(i):    #go to these options and increase them 
+                        if i[c] != -1 and c != chose: 
+                           i[c] -= diff / optCount
+                           if(i[c] < .000006):
+                              i[c] = 0
+                        c += 1
+
+            m = m - 1
+
+         self.gamesteps = []
       elif status == -1:
          # you lost the game
-         i = len(self.gamesteps)-1
-         decayC = 1
-         while i > 0: 
-            state = self.gamesteps[i]
-            if(isinstance(state, str)):
-               chose = self.gamesteps[i+1]
+         factor = self.lfactor
+         m = len(self.gamesteps)-1
+
+         while m >= 0: 
+            state = self.gamesteps[m]    #current step
+            if(isinstance(state, str)):   
+               chose = self.gamesteps[m+1]   #spot chosen
+               for i in self.kb:
+                  if i[0] == state:     #find the gameboard in kb 
+                     diff = i[chose] - (i[chose] - (i[chose] * factor))    #the difference taken will be spread across the other possible choices   
+                     i[chose] = i[chose] - (i[chose] * factor)         #subtract a percentage of the current value
+                     if i[chose] < 0.00006: 
+                        i[chose] = 0
+                     
+                     factor *= self.ldecay
+
+                     c = 1
+                     optCount = 0
+                     while c < len(i):    #find total other options in order to split the remaining num 
+                        if i[c] != -1 and c != chose: 
+                           optCount += 1
+                        c += 1
+
+                     c = 1
+                     while c < len(i):    #go to these options and increase them 
+                        if i[c] != -1 and c != chose: 
+                           i[c] += diff / optCount
+                           if(i[c] > 1):
+                              i[c] = 1
+                        c += 1
+
+            m = m - 1
             
-            i -= 1
+         self.gamesteps = []
       else: # status == 0
          # no winner
-         p = 0
+         self.gamesteps = []
 
 
    #update knowledge base file 
