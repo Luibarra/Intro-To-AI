@@ -60,7 +60,7 @@ numWinA = 0
 numWinB = 0
 numTied = 0
 
-for g in range(100):
+for g in range(100000):
    # reset global variables
    gameboard = "---------"
    gameover = False

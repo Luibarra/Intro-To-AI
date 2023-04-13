@@ -18,5 +18,5 @@ class RandomPlayer:
       # a good agent would learn here
       status = status
 
-   def stopPlaying():
+   def stopPlaying(self):
       return
