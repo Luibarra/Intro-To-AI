@@ -56,8 +56,8 @@ gameover = False
 
 
 # ---- Assign Players ----
-A = Human('X')  # numbers
-B = Agent('O')         # letters
+A = Agent('X')  # numbers
+B = Human('O')         # letters
 
 # play game until done
 move = 1

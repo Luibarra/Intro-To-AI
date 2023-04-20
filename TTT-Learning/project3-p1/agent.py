@@ -13,6 +13,7 @@ class Agent:
    symbol = 'X'
    datafile = ''
    
+   #init files    
    def __init__( self, xORo ):
       self.symbol = xORo
       # create data file if it doesn't exist
@@ -48,7 +49,7 @@ class Agent:
                   self.kb.append(x)
          # print(self.kb)
       
-
+   #use probabilties of board state to choose next move 
    def getMove( self, gameboard ):
       saved = False
       temp = [gameboard]
@@ -90,7 +91,7 @@ class Agent:
 
             return choice-1
 
-
+   #update actions based on game result
    def endGame( self, status, gameboard ):
       # learn from the result
       if status == 1: 
@@ -169,7 +170,6 @@ class Agent:
       else: # status == 0
          # no winner
          self.gamesteps = []
-
 
    #update knowledge base file 
    def stopPlaying(self):
