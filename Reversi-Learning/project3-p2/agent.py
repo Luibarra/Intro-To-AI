@@ -46,9 +46,9 @@ class Agent:
 
         #check if cur gameboard is saved
         for x in self.kb:
-            if gameboard in x:
+            if gameboard == x[0]:
                 saved = True
-            break
+                break
         #add unknown board to kb 
         if not saved:  
             for x in self.dChances: #add default probabilities 
@@ -59,13 +59,13 @@ class Agent:
                     temp[x+1] = -1
             
             countSlot = 0
-            for x in range(self.numOptions):      #add up number of available options in state
-                if gameboard[x] == '-':
+            for x in temp[1:]:      #add up number of available options in state
+                if x != -1:
                     countSlot += 1
             z = 1 / countSlot   #create num chance to place in available slots
-            for x in range(self.numOptions):  #put chances in temp
-                if gameboard[x] == '-':
-                    temp[x+1] = z
+            for x in temp[1:]:  #put chances in temp
+                if x != -1:
+                    x = z
 
             self.kb.append(temp)   #***fix*** odds must be adjusted to account for missing options     
         
@@ -115,6 +115,7 @@ class Agent:
                                 factor *= self.ldecay
                                 diff = (i[chose] - (i[chose] + (i[chose] * factor)) )*-1   #the difference taken will be spread across the other possible choices  
                                 i[chose] = i[chose] + (i[chose] * factor)         #subtract a percentage of the current value
+                                i[chose] = round(i[chose], 6)
                                 if i[chose] > 1: 
                                     i[chose] = 1
                         
@@ -135,7 +136,7 @@ class Agent:
 
                 m = m - 1
 
-            self.gamesteps = []
+            self.gamesteps = []     #empty out the taken steps for this game
         elif status == -1:
             # you lost the game
             factor = self.lfactor
@@ -153,6 +154,7 @@ class Agent:
                             else:     #all other options are affected by decay
                                 diff = i[chose] - (i[chose] - (i[chose] * factor))    #the difference taken will be spread across the other possible choices   
                                 i[chose] = i[chose] - (i[chose] * factor)         #subtract a percentage of the current value
+                                i[chose] = round(i[chose], 6)
                                 if i[chose] < 0.00006: 
                                     i[chose] = 0
                             
@@ -175,7 +177,7 @@ class Agent:
 
                 m = m - 1
             
-            self.gamesteps = []
+            self.gamesteps = []     #empty out the taken steps for this game
         else: # status == 0
             # no winner
             self.gamesteps = []
