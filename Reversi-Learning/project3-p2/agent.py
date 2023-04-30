@@ -24,9 +24,9 @@ class Agent:
         #~~~potentially put in x playable in the future~~~ would have to fix kb erase issue
         
         # create data file if it doesn't exist
-        self.datafile = 'learningdata/O-Data.txt'
-        if( not exists('learningdata/O-Data.txt')): 
-            open('learningdata/O-Data.txt', 'x')
+        self.datafile = 'project3-p2/learningdata/O-Data.txt'
+        if( not exists(self.datafile)): 
+            open(self.datafile, 'x')
         else:   #if it already exists, put existing info into knowledge base
             with open(self.datafile) as textFile:
                 for line in textFile:
@@ -57,6 +57,16 @@ class Agent:
             for x in range(self.numOptions): #make taken spots unreachable 
                 if gameboard[x] != '-': 
                     temp[x+1] = -1
+            
+            countSlot = 0
+            for x in range(self.numOptions):      #add up number of available options in state
+                if gameboard[x] == '-':
+                    countSlot += 1
+            z = 1 / countSlot   #create num chance to place in available slots
+            for x in range(self.numOptions):  #put chances in temp
+                if gameboard[x] == '-':
+                    temp[x+1] = z
+
             self.kb.append(temp)   #***fix*** odds must be adjusted to account for missing options     
         
         # Decide where to play
@@ -96,26 +106,32 @@ class Agent:
                     chose = self.gamesteps[m+1]   #spot chosen
                     for i in self.kb:
                         if i[0] == state:     #find the gameboard in kb 
-                            factor *= self.ldecay
-                            diff = (i[chose] - (i[chose] + (i[chose] * factor)) )*-1   #the difference taken will be spread across the other possible choices   
-                            i[chose] = i[chose] + (i[chose] * factor)         #subtract a percentage of the current value
-                            if i[chose] > 1: 
+                            if m == len(self.gamesteps)-1:  #set last choice to 1 
                                 i[chose] = 1
+                                for j in i:    #set all other options to -1
+                                    if j != i[chose]:
+                                        j = -1
+                            else:     #all other options are affected by decay
+                                factor *= self.ldecay
+                                diff = (i[chose] - (i[chose] + (i[chose] * factor)) )*-1   #the difference taken will be spread across the other possible choices  
+                                i[chose] = i[chose] + (i[chose] * factor)         #subtract a percentage of the current value
+                                if i[chose] > 1: 
+                                    i[chose] = 1
                         
-                            c = 1
-                            optCount = 0
-                            while c < len(i):    #find total other options in order to split the remaining num 
-                                if i[c] != -1 and c != chose: 
-                                    optCount += 1
-                                c += 1
+                                c = 1
+                                optCount = 0
+                                while c < len(i):    #find total other options in order to split the remaining num 
+                                    if i[c] != -1 and c != chose: 
+                                        optCount += 1
+                                    c += 1
 
-                            c = 1
-                            while c < len(i):    #go to these options and increase them 
-                                if i[c] != -1 and c != chose: 
-                                    i[c] -= diff / optCount
-                                    if(i[c] < .000006):
-                                        i[c] = 0
-                                c += 1
+                                c = 1
+                                while c < len(i):    #go to these options and increase them 
+                                    if i[c] != -1 and c != chose: 
+                                        i[c] -= diff / optCount
+                                        if(i[c] < .000006):
+                                            i[c] = 0
+                                    c += 1
 
                 m = m - 1
 
@@ -131,10 +147,14 @@ class Agent:
                     chose = self.gamesteps[m+1]   #spot chosen
                     for i in self.kb:
                         if i[0] == state:     #find the gameboard in kb 
-                            diff = i[chose] - (i[chose] - (i[chose] * factor))    #the difference taken will be spread across the other possible choices   
-                            i[chose] = i[chose] - (i[chose] * factor)         #subtract a percentage of the current value
-                            if i[chose] < 0.00006: 
+                            if m == len(self.gamesteps)-1:  #set last choice to 0 
+                                diff = i[chose]
                                 i[chose] = 0
+                            else:     #all other options are affected by decay
+                                diff = i[chose] - (i[chose] - (i[chose] * factor))    #the difference taken will be spread across the other possible choices   
+                                i[chose] = i[chose] - (i[chose] * factor)         #subtract a percentage of the current value
+                                if i[chose] < 0.00006: 
+                                    i[chose] = 0
                             
                             factor *= self.ldecay
 
