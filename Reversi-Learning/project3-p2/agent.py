@@ -3,8 +3,8 @@ from os.path import exists
 
 class Agent:
 
-    lfactor = .5
-    ldecay = .5
+    lfactor = .65
+    ldecay = .85
 
     kb = []
     gamesteps = []
@@ -62,10 +62,13 @@ class Agent:
             for x in temp[1:]:      #add up number of available options in state
                 if x != -1:
                     countSlot += 1
-            z = 1 / countSlot   #create num chance to place in available slots
-            for x in temp[1:]:  #put chances in temp
-                if x != -1:
-                    x = z
+            z = (1 / countSlot)   #create num chance to place in available slots
+
+            index = 1
+            while index < len(temp):  #put chances in temp
+                if temp[index] != -1:
+                    temp[index] = z
+                index += 1
 
             self.kb.append(temp)   #***fix*** odds must be adjusted to account for missing options     
         
@@ -115,7 +118,7 @@ class Agent:
                                 factor *= self.ldecay
                                 diff = (i[chose] - (i[chose] + (i[chose] * factor)) )*-1   #the difference taken will be spread across the other possible choices  
                                 i[chose] = i[chose] + (i[chose] * factor)         #subtract a percentage of the current value
-                                i[chose] = round(i[chose], 6)
+                                i[chose] = i[chose]
                                 if i[chose] > 1: 
                                     i[chose] = 1
                         
@@ -133,6 +136,7 @@ class Agent:
                                         if(i[c] < .000006):
                                             i[c] = 0
                                     c += 1
+                            break
 
                 m = m - 1
 
@@ -154,7 +158,7 @@ class Agent:
                             else:     #all other options are affected by decay
                                 diff = i[chose] - (i[chose] - (i[chose] * factor))    #the difference taken will be spread across the other possible choices   
                                 i[chose] = i[chose] - (i[chose] * factor)         #subtract a percentage of the current value
-                                i[chose] = round(i[chose], 6)
+                                i[chose] = i[chose]
                                 if i[chose] < 0.00006: 
                                     i[chose] = 0
                             
@@ -174,6 +178,7 @@ class Agent:
                                     if(i[c] > 1):
                                         i[c] = 1
                                 c += 1
+                            break
 
                 m = m - 1
             
