@@ -130,6 +130,7 @@ gameover = False
 X = RandomPlayer('X')
 #O = RandomPlayer('O')
 O = Agent('O') # use this when agent is implemented
+print('loaded')
 
 # counters for tracking wins over multiple trials
 numWinX = 0
@@ -137,12 +138,13 @@ numWinO = 0
 numTied = 0
 
 # how many games do you want to play?
-for g in range(5000):
+for g in range(10):
    # reset global variables for new game
    gameboard = "--------------XO----OX--------------"
    gameover = False
 
    # play game until done
+   
    move = 1
    while( not gameover ):
       if countPossibleMoves( gameboard, 'X' ) > 0:
@@ -180,11 +182,11 @@ for g in range(5000):
          #printBoard(gameboard)
 
       move = move + 1
-
+   
    # when running thousands of learning trials,
    #   periodic updates are nice confirmation
    #   that everything's still running
-   if (numWinX + numWinO + numTied) % 1000 == 0:
+   if (numWinX + numWinO + numTied) % 100 == 0:
       print( "Completed " + str(numWinX + numWinO + numTied) )
 
 X.stopPlaying()
